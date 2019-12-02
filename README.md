@@ -2,7 +2,7 @@
 This is an android for searching favourite programming ebooks online.
 
 ## Screenshots
-<img src="/assets/screenshot.png">
+<img src="/assets/screenshot.jpg">
 
 ## Getting Started
 Write something here
