@@ -26,9 +26,16 @@ class Book {
         image = json['image'],
         url = json['url'];
 
-  String toString() => "Place: $title";
+  String toString() => "Book: $title";
 }
 
-getBooks() {
-  http.get(api).then((res) => print(res.body));
+Future<Stream<Book>> getBooks() async {
+  var client = new http.Client();
+  var streamRes = await client.send(http.Request('get', Uri.parse(api)));
+
+  return streamRes.stream
+      .transform(utf8.decoder)
+      .transform(json.decoder)
+      .expand((jsonBody) => (jsonBody as Map)['books'])
+      .map((jsonPlace) => new Book.fromJson(jsonPlace));
 }
