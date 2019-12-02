@@ -6,22 +6,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<String> _places = <String>[];
+
+  @override
+  void initState() {
+    super.initState();
+    _places = List.generate(100, (i) => 'Book $i');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("CODE BOOKS"),
-        elevation: 0.0,
-        centerTitle: true,
-      ),
-      body: Container(
-        height: 300,
-        decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40))),
-      ),
-    );
+        appBar: AppBar(
+          title: Text("CODE BOOKS"),
+          elevation: 0.0,
+          centerTitle: true,
+        ),
+        body: Center(
+          child: ListView(
+            children: _places.map((place) => Text(place)).toList(),
+          ),
+        ));
   }
 }

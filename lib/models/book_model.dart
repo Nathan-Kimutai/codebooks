@@ -8,6 +8,4 @@ class Book {
 
   Book(
       {this.title, this.subtitle, this.isbn, this.price, this.image, this.url});
-
-  factory Book.fromJson()
 }
