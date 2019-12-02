@@ -1,3 +1,4 @@
+import 'package:codebooks/service/get_new_books.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -6,12 +7,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> _places = <String>[];
+  List<Book> _books = <Book>[];
 
   @override
   void initState() {
     super.initState();
-    _places = List.generate(100, (i) => 'Book $i');
+    listenForBooks();
+  }
+
+  listenForBooks() async {
+    var streams = await getBooks();
+    streams.listen((book) => setState(() => _books.add(book)));
   }
 
   @override
@@ -24,8 +30,23 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Center(
           child: ListView(
-            children: _places.map((place) => Text(place)).toList(),
+            children: _books.map((book) => BookWidget(book)).toList(),
           ),
         ));
+  }
+}
+
+class BookWidget extends StatelessWidget {
+  final Book _books;
+  BookWidget(this._books);
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        child: Image.network(_books.image),
+      ),
+      title: Text(_books.title),
+      subtitle: Text(_books.subtitle),
+    );
   }
 }
