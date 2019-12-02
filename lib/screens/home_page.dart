@@ -10,11 +10,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Code books"),
+        title: Text("CODE BOOKS"),
         elevation: 0.0,
+        centerTitle: true,
       ),
-      body: Center(
-        child: Text("Landing page here"),
+      body: Container(
+        height: 300,
+        decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(40),
+                bottomRight: Radius.circular(40))),
       ),
     );
   }
