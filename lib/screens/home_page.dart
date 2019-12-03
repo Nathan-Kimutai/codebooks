@@ -1,4 +1,5 @@
 import 'package:codebooks/service/get_new_books.dart';
+import 'package:codebooks/utils/top_clipper.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,30 +24,58 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("CODE BOOKS"),
-          elevation: 0.0,
-          centerTitle: true,
-        ),
-        body: Center(
-          child: ListView(
-            children: _books.map((book) => BookWidget(book)).toList(),
-          ),
-        ));
+      body: Column(
+        children: <Widget>[TopPart()],
+      ),
+    );
   }
 }
 
-class BookWidget extends StatelessWidget {
-  final Book _books;
-  BookWidget(this._books);
+class TopPart extends StatefulWidget {
+  @override
+  _TopPartState createState() => _TopPartState();
+}
+
+class _TopPartState extends State<TopPart> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        child: Image.network(_books.image),
-      ),
-      title: Text(_books.title),
-      subtitle: Text(_books.subtitle),
+    return Stack(
+      children: <Widget>[
+        ClipPath(
+          clipper: TopClipper(),
+          child: Container(
+            height: 400,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
+                gradient: LinearGradient(
+                    colors: [Color(0XFF4CDEAF), Color(0XFF077e59)])),
+            // color: Color(0xFF4CDEAF),
+            child: Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(top: 80),
+                  child: Text(
+                    "CODE BOOKS",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextField(
+                  decoration: InputDecoration(hintText: "Search books"),
+                )
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
