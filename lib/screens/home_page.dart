@@ -25,100 +25,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[TopPart()],
+      appBar: AppBar(title: Text("code books")),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            color: Colors.orange,
+          ),
+          ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 20,
+              itemBuilder: (BuildContext context, int index) {
+                return Text("Hello");
+              })
+        ],
       ),
-    );
-  }
-}
-
-final TextEditingController searchController = TextEditingController();
-
-class TopPart extends StatefulWidget {
-  @override
-  _TopPartState createState() => _TopPartState();
-}
-
-class _TopPartState extends State<TopPart> {
-  Widget _buildSearchBar() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        SizedBox(height: 10.0),
-        Container(
-          margin: EdgeInsets.only(top: 0, left: 30, right: 30, bottom: 0),
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            controller: searchController,
-            keyboardType: TextInputType.text,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-              hintText: 'Search books',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        ClipPath(
-          clipper: TopClipper(),
-          child: Container(
-            height: 500,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
-                color: Color(0xFF0050BC)),
-            // color: Color(0xFF4CDEAF),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 80),
-                  child: Text(
-                    "Code Books",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "What would you like to read",
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                _buildSearchBar(),
-              ],
-            ),
-          ),
-        )
-      ],
     );
   }
 }
