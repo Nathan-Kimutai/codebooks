@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+//This id the homepage
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
